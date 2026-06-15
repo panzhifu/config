@@ -1,0 +1,27 @@
+# 1. 链接整个配置目录（仅 Unix）
+[[files]]
+source = "$HOME/dotfiles/nvim"
+target = "$HOME/.config/nvim"
+strategy = "symlink"
+platforms = ["linux", "macos"]
+
+# 2. 复制 Windows PowerShell 配置
+[[files]]
+source = "./dotfiles/Microsoft.PowerShell_profile.ps1"
+target = "$HOME/Documents/WindowsPowerShell/Microsoft.PowerShell_profile.ps1"
+strategy = "copy"
+platforms = ["windows"]
+
+# 3. 全局 git 配置（所有平台）
+[[files]]
+source = "./dotfiles/gitconfig"
+target = "$HOME/.gitconfig"
+strategy = "copy"
+# platforms 省略 = 所有平台
+
+# 4. 复制并覆盖整个目录（递归）
+[[files]]
+source = "./themes"
+target = "$HOME/.local/share/themes"
+strategy = "copy"
+platforms = ["linux"]

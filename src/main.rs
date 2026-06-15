@@ -1,11 +1,16 @@
-// 全平台配置脚本
-use anyhow::{Context, Result};
+use anyhow::Result;
 use clap::Parser;
-use std::env;
-use std::process::Command;
 
-// 命令行参数
-#[derive(Parser)]
-#[command(name = "config", about = "全平台配置工具", version)]
-struct Cli {}
-fn main() {}
+use config::cli::{Cli, Commands};
+use config::commands;
+
+// ---------- 主函数 ----------
+fn main() -> Result<()> {
+    let cli = Cli::parse();
+
+    match cli.command {
+        Some(Commands::Check) => commands::cmd_check(),
+        Some(Commands::Update { config }) => commands::cmd_update(&config),
+        None => commands::cmd_check(),
+    }
+}
